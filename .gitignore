@@ -1,0 +1,16 @@
+/node_modules
+/transpile
+/test-data
+/cluster-data
+actor.odg
+.directory
+.rpt2_cache
+/dist
+/src/c_crypto/**/CMakeCache.txt
+/src/c_crypto/**/.vscode
+/src/c_crypto/**/CMakeFiles
+/src/c_crypto/**/bin
+/src/c_crypto/**/Makefile
+/src/c_crypto/**/lib
+/src/c_crypto/crypto/src/libpqcrypto
+*.o

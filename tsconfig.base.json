@@ -1,0 +1,45 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "lib": ["es2017", "webworker"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "typeRoots" : [
+            "./node_modules/@types",
+            "./lib/global"
+        ],
+        "types" : [
+            "node",
+            "mocha"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@root/*": ["./*"],
+            "@core/*": [ "src/core/*" ],
+            "@test/*": [ "test/*" ],
+            "@util/*": [ "src/utility/*" ],
+            "@wasm/*": [ "src/wasm/*"],
+            "@build/*": [ "build/*"]
+        }
+    },
+    "include": [
+        "build/**/*",
+        "lib/**/*",
+        "src/**/*",
+        "test/**/*",
+        "wasm/**/*.js"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules",
+        ".npm"
+    ]
+}

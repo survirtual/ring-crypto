@@ -1,0 +1,52 @@
+{
+  "name": "@actor/crypto",
+  "version": "1.0.0",
+  "description": "",
+  "browser": "dist/bundle.browser.es5.js",
+  "types": "dist/browser/src/platforms/browser",
+  "scripts": {
+    "wasm": "rimraf ./dist/transpile/wasm && node ./dist/transpile/build/wasm-build.js",
+    "wasm-test": "rimraf ./dist/transpile/wasm && node ./dist/transpile/build/wasm-build.js --test",
+    "lint": "npx tslint --project tsconfig.json",
+    "transpile": "npx rimraf ./dist/transpile && npx tsc",
+    "test": "npm run pre-test && npx mocha \"dist/test\"",
+    "pre-test": "npm run transpile && npm run wasm-test && npm run copy-transpile-node && node ./dist/nodejs/build/nodejs.js",
+    "bundle": "npm run transpile  && npm run wasm && npm run copy-transpile-browser && npm run copy-transpile-node && node ./dist/browser/build/browser.js && node ./dist/nodejs/build/nodejs.js && npx babel ./dist/bundle.browser.js --out-file ./dist/bundle.browser.es5.js --source-maps",
+    "copy-transpile-browser": "npx rimraf ./dist/browser && node ./dist/transpile/build/processing/replace-browser-output.js",
+    "copy-transpile-node": "npx rimraf ./dist/nodejs && node ./dist/transpile/build/processing/replace-nodejs-output.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@types/mocha": "^5.2.7",
+    "@types/rimraf": "^2.0.3",
+    "buffer": "^5.4.3",
+    "mocha": "^5.2.0",
+    "rimraf": "^2.7.1",
+    "rollup": "^0.67.4",
+    "rollup-plugin-commonjs": "^9.3.4",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "terser": "^3.17.0",
+    "tslint": "^5.20.1",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.7.2"
+  },
+  "_moduleAliases": {
+    "@root": "./",
+    "@core": "./dist/src/core",
+    "@test": "./dist/test",
+    "@util": "./dist/src/utility",
+    "@wasm": "./dist/wasm",
+    "@build": "./dist/build"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.7.0",
+    "@types/node": "^10.17.6",
+    "supports-color": "^7.1.0"
+  }
+}

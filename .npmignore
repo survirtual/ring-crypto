@@ -1,0 +1,15 @@
+/node_modules
+/wasm
+/test
+
+/actor.odg
+.directory
+.rpt2_cache
+.vscode
+
+!dist/**/*
+!src/**/*
+
+# !dist/transpile/src/core/
+# !dist/nodejs/src/core/
+# !dist/browser/src/core/

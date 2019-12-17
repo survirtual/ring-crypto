@@ -1,0 +1,28 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-constant-condition": true,
+        "no-console": false,
+        "no-empty": false,
+        "ordered-imports": false,
+        "only-arrow-functions": false,
+        "no-bitwise": false,
+        "object-literal-sort-keys": false,
+        "interface-name": false,
+        "max-line-length": false,
+        "no-eval": false,
+        "no-namespace": false,
+        "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+        "prefer-for-of": false
+    },
+    "rulesDirectory": [
+    "node_modules/tslint-eslint-rules/dist/rules"
+    ],
+    "linterOptions": {
+        "exclude": ["**/*.json"]
+    }
+}
