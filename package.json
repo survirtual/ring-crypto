@@ -9,7 +9,7 @@
     "wasm-test": "rimraf ./dist/transpile/wasm && node ./dist/transpile/build/wasm-build.js --test",
     "lint": "npx tslint --project tsconfig.json",
     "transpile": "npx rimraf ./dist/transpile && npx tsc",
-    "test": "npm run pre-test && npx mocha \"dist/test\"",
+    "test": "npm run pre-test && npx mocha --timeout 999999 --colors dist/nodejs/test",
     "pre-test": "npm run transpile && npm run wasm-test && npm run copy-transpile-node && node ./dist/nodejs/build/nodejs.js",
     "bundle": "npm run transpile  && npm run wasm && npm run copy-transpile-browser && npm run copy-transpile-node && node ./dist/browser/build/browser.js && node ./dist/nodejs/build/nodejs.js && npx babel ./dist/bundle.browser.js --out-file ./dist/bundle.browser.es5.js --source-maps",
     "copy-transpile-browser": "npx rimraf ./dist/browser && node ./dist/transpile/build/processing/replace-browser-output.js",
