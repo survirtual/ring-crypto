@@ -26,38 +26,7 @@ resolve({
 
 rollupConfig.inputs.push({
   inputOptions: {
-    input: `${root}/src/platforms/browser/browser-worker-loader/browser-worker-loader-ext.js`
-  },
-  outputOptions: {
-    file: `${root}/src/platforms/browser/browser-worker-loader/browser-worker-loader-ext.js`,
-    name: "workerRuntime",
-    format: "umd"
-  }
-},
-{
-  inputOptions: {
-    input: `${root}/src/platforms/browser/browser-worker-loader/browser-worker-loader-prepend.js`
-  },
-  outputOptions: {
-    file: `${root}/src/platforms/browser/browser-worker-loader/browser-worker-loader-prepend.js`,
-    name: "workerRuntime",
-    format: "umd"
-  }
-},
-{
-  inputOptions: {
-    input: `${root}/src/core/worker/worker-runtime.js`
-  },
-  outputOptions: {
-    file: `${root}/src/core/worker/worker-runtime.js`,
-    name: "workerRuntime",
-    format: "umd"
-  }
-});
-
-rollupConfig.inputs.push({
-  inputOptions: {
-      input: `${root}/src/platforms/browser/index.js`
+      input: `${root}/src/index.js`
   },
   outputOptions: {
       file: "dist/bundle.browser.js",
