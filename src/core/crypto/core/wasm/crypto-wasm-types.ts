@@ -50,7 +50,7 @@ export const outputUsing = function<T extends Uint8Array>(memoryAllocBytes: numb
     ptr.to = Module._malloc(memoryAllocBytes);
 
     // Set the input value
-    Module.HEAPU8.set(Buffer.alloc(memoryAllocBytes), ptr.to);
+    Module.HEAPU8.set(new Uint8Array(memoryAllocBytes), ptr.to);
 
     // Callback with the pointer
     fn(ptr);

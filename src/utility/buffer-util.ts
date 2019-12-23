@@ -151,6 +151,8 @@ const base = function(ALPHABET) {
 };
 const base58 = base("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz");
 
+declare type Buffer = any;
+
 export class BufferUtility {
     public static xor(bufferSrc: Buffer, buffer: Buffer): Buffer {
         const length = Math.max(bufferSrc.length, buffer.length);
