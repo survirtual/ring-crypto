@@ -9,7 +9,6 @@ import { srcRoot as getSrcRoot, browserRoot } from "./utility/app-root";
 
 const srcRoot = getSrcRoot();
 const root = browserRoot();
-const minify = false;
 
 envIndexReplace(root, "browser/env-index", (err) => {
     if (err) {
@@ -65,15 +64,12 @@ async function loop(i, inputConfig) {
     file = file.replace("function Buffer$1 (arg, encodingOrOffset, length) {", `${bufferFix}function Buffer$1 (arg, encodingOrOffset, length) {`);
 
     let buf;
-    if (minify) {
-      // Minify
-      const min = Terser.minify(file);
-      buf = Buffer.from(min.code);
-    } else {
-      // Don't minify
-      buf = Buffer.from(file);
-    }
-
+    // Minify
+    const min = Terser.minify(file);
+    buf = Buffer.from(min.code);
+    fs.writeFileSync(`${filename.replace('.js', '.min.js')}`, buf);
+    // Don't minify
+    buf = Buffer.from(file);
     fs.writeFileSync(`${filename}`, buf);
 
   }
