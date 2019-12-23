@@ -267,7 +267,7 @@ const valid = wait Crypto.Ring.verify(msg, ring, ringSig);
 
 Contributions from anyone are welcome.  If you see any bugs or can provide enhancements, please open an issue.
 
-### Typescript + WASM
+## Typescript + WASM
 
 The primary language used is Typescript, with an ES5 target of NodeJS and Browsers.  After the transpilation step, the output is ran through Babel for flexible compatibility targets.  The crypto library is in C/C++ from the Monero project, with a WASM target.  The WASM is injected into bundled builds and is called via Typescript bindings.
 
