@@ -1,7 +1,8 @@
 import { CryptoWASM } from "../wasm/crypto-wasm";
-import { ISignFactory, ISignKeyPair, ISignature, ISignPublicKey } from "../interfaces/i-sign";
+import { ISignFactory, ISignKeyPair, ISignature, ISignPublicKey, SIGN_CONSTANTS } from "../interfaces/i-sign";
 
 export class SignFactory implements ISignFactory {
+    public constants = SIGN_CONSTANTS;
 
     public async keyPair(): Promise<ISignKeyPair> {
         const keys = await CryptoWASM.generateKeys();

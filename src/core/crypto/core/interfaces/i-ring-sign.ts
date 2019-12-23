@@ -12,6 +12,7 @@ export interface IRingSignature {
 export interface IRingSignFactory {
     sign: (msg: Uint8Array, secretKeyPair: ISignKeyPair, ring: ISignPublicKey[], keyImage?: IKeyImage) => Promise<IRingSignature>;
     verify: (msg: Uint8Array, ring: ISignPublicKey[], ringSignature: IRingSignature) => Promise<boolean>;
+    constants: typeof RING_CONSTANTS;
 }
 
 const RING_CONSTANTS = {

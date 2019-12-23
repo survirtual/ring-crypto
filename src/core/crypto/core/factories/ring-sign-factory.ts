@@ -1,10 +1,11 @@
 import { CryptoWASM } from "../wasm/crypto-wasm";
-import { IRingSignFactory, IRingSignature, IKeyImage } from "../interfaces/i-ring-sign";
+import { IRingSignFactory, IRingSignature, IKeyImage, RING_CONSTANTS } from "../interfaces/i-ring-sign";
 import { ISignKeyPair, ISignPublicKey } from "../interfaces/i-sign";
 import { PublicKeyArray, RingSignature } from "../wasm/crypto-wasm-types";
 import { BufferUtility } from "@util/index";
 
 export class RingSignFactory implements IRingSignFactory {
+    public constants = RING_CONSTANTS;
     public async sign(
         msg: Uint8Array,
         secretKeyPair: ISignKeyPair,

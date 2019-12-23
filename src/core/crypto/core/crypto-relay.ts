@@ -1,22 +1,26 @@
 import { ICrypto } from "./interfaces/i-crypto";
 import { RandomFactory } from "./factories/random-factory";
-import { ISignKeyPair, ISignature, ISignPublicKey } from "./interfaces/i-sign";
-import { ISecretBoxKey } from "./interfaces/i-secret-box";
-import { IBoxKeyPair, IBoxPublicKey, IBoxSecretKey, IBoxSharedSecret } from "./interfaces/i-box";
-import { IKeyImage, IRingSignature } from "./interfaces/i-ring-sign";
-import { IHash } from "./interfaces/i-hash";
+import { ISignKeyPair, ISignature, ISignPublicKey, SIGN_CONSTANTS } from "./interfaces/i-sign";
+import { ISecretBoxKey, SECRET_BOX_CONSTANTS } from "./interfaces/i-secret-box";
+import { IBoxKeyPair, IBoxPublicKey, IBoxSecretKey, IBoxSharedSecret, BOX_CONSTANTS } from "./interfaces/i-box";
+import { IKeyImage, IRingSignature, RING_CONSTANTS } from "./interfaces/i-ring-sign";
+import { IHash, HASH_CONSTANTS } from "./interfaces/i-hash";
 import { serializeArgs, deserializeTypes } from "./crypto-serialize";
 
 export class CryptoRelay implements ICrypto {
     public readonly Random = new RandomFactory();
 
     public readonly Hash = {
+        constants: HASH_CONSTANTS,
+
         async data(data: Uint8Array): Promise<IHash> {
             return await crypto.relayCommand("Hash.data", data);
         }
     };
 
     public readonly SecretBox = {
+        constants: SECRET_BOX_CONSTANTS,
+
         async key(): Promise<ISecretBoxKey> {
             return await crypto.relayCommand("SecretBox.key");
         },
@@ -31,6 +35,8 @@ export class CryptoRelay implements ICrypto {
     };
 
     public readonly Box = {
+        constants: BOX_CONSTANTS,
+
         async keyPair(): Promise<IBoxKeyPair> {
             return await crypto.relayCommand("Box.keyPair");
         },
@@ -49,6 +55,8 @@ export class CryptoRelay implements ICrypto {
     };
 
     public readonly Sign = {
+        constants: SIGN_CONSTANTS,
+
         async keyPair(): Promise<ISignKeyPair> {
             return await crypto.relayCommand("Sign.keyPair");
         },
@@ -63,6 +71,8 @@ export class CryptoRelay implements ICrypto {
     };
 
     public readonly Ring = {
+        constants: RING_CONSTANTS,
+
         async sign(
             msg: Uint8Array,
             secretKeyPair: ISignKeyPair,

@@ -91,7 +91,7 @@ Decrypts message using specified secret key and random nonce.  Returns Uint8Arra
 ```typescript
 const secretKey = await Crypto.SecretBox.key();
 const msg = Buffer.from("box this message up");
-const nonce = Crypto.Random.bytes(SECRET_BOX_CONSTANTS.NONCE_LENGTH);
+const nonce = Crypto.Random.bytes(Crypto.SecretBox.constants.NONCE_LENGTH);
 
 const box = await Crypto.SecretBox.box(msg, nonce, secretKey);
 
@@ -156,7 +156,7 @@ const sharedKeyA = await Crypto.Box.sharedKey(keyPairB.b_public_key, keyPairA.b_
 const sharedKeyB = await Crypto.Box.sharedKey(keyPairA.b_public_key, keyPairB.b_secret_key);
 
 const msg = Buffer.from("box this message up");
-const nonce = Crypto.Random.bytes(SECRET_BOX_CONSTANTS.NONCE_LENGTH);
+const nonce = Crypto.Random.bytes(Crypto.Box.constants.NONCE_LENGTH);
 
 const box = await Crypto.Box.box(msg, nonce, sharedKeyA);
 

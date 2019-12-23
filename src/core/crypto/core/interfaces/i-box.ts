@@ -32,6 +32,7 @@ export interface IBoxFactory {
     sharedKey: (remotePublicKey: IBoxPublicKey, localSecretKey: IBoxSecretKey) => Promise<IBoxSharedSecret>;
     box: (msg: Uint8Array, nonce: Uint8Array, key: IBoxSharedSecret) => Promise<Uint8Array>;
     open: (box: Uint8Array, nonce: Uint8Array, key: IBoxSharedSecret) => Promise<Uint8Array>;
+    constants: typeof BOX_CONSTANTS;
 }
 
 const BOX_CONSTANTS = {

@@ -4,6 +4,7 @@ export interface IHash {
 
 export interface IHashFactory {
     data: (data: Uint8Array) => Promise<IHash>;
+    constants: typeof HASH_CONSTANTS;
 }
 
 const HASH_CONSTANTS = {

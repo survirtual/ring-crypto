@@ -16,6 +16,7 @@ export interface ISecretBoxFactory {
     key: () => Promise<ISecretBoxKey>;
     box: (msg: Uint8Array, nonce: Uint8Array, key: ISecretBoxKey) => Promise<Uint8Array>;
     open: (box: Uint8Array, nonce: Uint8Array, key: ISecretBoxKey) => Promise<Uint8Array>;
+    constants: typeof SECRET_BOX_CONSTANTS;
 }
 
 const SECRET_BOX_CONSTANTS = {

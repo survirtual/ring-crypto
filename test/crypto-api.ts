@@ -4,11 +4,6 @@ import "mocha";
 import assert = require("assert");
 import { BufferUtility } from "@util/index";
 import { Crypto } from "@core/crypto";
-import { HASH_CONSTANTS } from "@core/crypto/core/interfaces/i-hash";
-import { SECRET_BOX_CONSTANTS } from "@core/crypto/core/interfaces/i-secret-box";
-import { BOX_CONSTANTS } from "@core/crypto/core/interfaces/i-box";
-import { SIGN_CONSTANTS } from "@core/crypto/core/interfaces/i-sign";
-import { RING_CONSTANTS } from "@core/crypto/core/interfaces/i-ring-sign";
 
 export default () => {
     describe("crypto-api", function() {
@@ -41,11 +36,11 @@ export default () => {
         describe("hash", function() {
             it("should hash", async function() {
                 const testIterations = 100;
-                const emptyBytes = new Uint8Array(HASH_CONSTANTS.HASH_LENGTH);
+                const emptyBytes = new Uint8Array(Crypto.Hash.constants.HASH_LENGTH);
                 let prevHashes = {};
                 for (let i = 0; i < testIterations; i++) {
                     const hash = (await Crypto.Hash.data(Buffer.from(i.toString()))).hash;
-                    assert.equal(hash.length, HASH_CONSTANTS.HASH_LENGTH);
+                    assert.equal(hash.length, Crypto.Hash.constants.HASH_LENGTH);
                     assert.notDeepEqual(hash, emptyBytes);
 
                     const key = BufferUtility.toBase58(Buffer.from(hash)).b58;
@@ -58,11 +53,11 @@ export default () => {
         describe("secretbox", function() {
             it("should generate a secret key", async function() {
                 const testIterations = 100;
-                const emptyBytes = new Uint8Array(SECRET_BOX_CONSTANTS.KEY_LENGTH);
+                const emptyBytes = new Uint8Array(Crypto.SecretBox.constants.KEY_LENGTH);
                 let prevKeys = {};
                 for (let i = 0; i < testIterations; i++) {
                     const secretKey = (await Crypto.SecretBox.key()).sb_secret;
-                    assert.equal(secretKey.length, SECRET_BOX_CONSTANTS.KEY_LENGTH);
+                    assert.equal(secretKey.length, Crypto.SecretBox.constants.KEY_LENGTH);
                     assert.notDeepEqual(secretKey, emptyBytes);
 
                     const key = BufferUtility.toBase58(Buffer.from(secretKey)).b58;
@@ -74,12 +69,12 @@ export default () => {
             it("should create a secret box", async function() {
                 const secretKey = (await Crypto.SecretBox.key());
                 const msg = Buffer.from("box this message up");
-                const emptyBytes = new Uint8Array(msg.length + SECRET_BOX_CONSTANTS.BOX_ZERO_BYTES);
-                const nonce = Crypto.Random.bytes(SECRET_BOX_CONSTANTS.NONCE_LENGTH);
+                const emptyBytes = new Uint8Array(msg.length + Crypto.SecretBox.constants.BOX_ZERO_BYTES);
+                const nonce = Crypto.Random.bytes(Crypto.SecretBox.constants.NONCE_LENGTH);
 
                 const box = await Crypto.SecretBox.box(msg, nonce, secretKey);
 
-                assert.equal(box.length, msg.length + SECRET_BOX_CONSTANTS.BOX_ZERO_BYTES);
+                assert.equal(box.length, msg.length + Crypto.SecretBox.constants.BOX_ZERO_BYTES);
                 assert.notDeepEqual(box, emptyBytes);
                 assert.notDeepEqual(box, msg);
             });
@@ -87,7 +82,7 @@ export default () => {
             it("should open a secret box", async function() {
                 const secretKey = (await Crypto.SecretBox.key());
                 const msg = Buffer.from("box this message up");
-                const nonce = Crypto.Random.bytes(SECRET_BOX_CONSTANTS.NONCE_LENGTH);
+                const nonce = Crypto.Random.bytes(Crypto.SecretBox.constants.NONCE_LENGTH);
 
                 const box = await Crypto.SecretBox.box(msg, nonce, secretKey);
 
@@ -99,25 +94,25 @@ export default () => {
 
         describe("box", function() {
             it("should generate a keypair for boxing", async function() {
-                const emptyPubBytes = new Uint8Array(BOX_CONSTANTS.PUBLIC_KEY_LENGTH);
-                const emptySecBytes = new Uint8Array(BOX_CONSTANTS.SECRET_KEY_LENGTH);
+                const emptyPubBytes = new Uint8Array(Crypto.Box.constants.PUBLIC_KEY_LENGTH);
+                const emptySecBytes = new Uint8Array(Crypto.Box.constants.SECRET_KEY_LENGTH);
 
                 const keyPair = await Crypto.Box.keyPair();
 
-                assert.equal(keyPair.b_public_key.b_public_data.length, BOX_CONSTANTS.PUBLIC_KEY_LENGTH);
-                assert.equal(keyPair.b_secret_key.b_secret_data.length, BOX_CONSTANTS.SECRET_KEY_LENGTH);
+                assert.equal(keyPair.b_public_key.b_public_data.length, Crypto.Box.constants.PUBLIC_KEY_LENGTH);
+                assert.equal(keyPair.b_secret_key.b_secret_data.length, Crypto.Box.constants.SECRET_KEY_LENGTH);
                 assert.notDeepEqual(keyPair.b_public_key.b_public_data, emptyPubBytes);
                 assert.notDeepEqual(keyPair.b_secret_key.b_secret_data, emptySecBytes);
             });
 
             it("should generate a shared key", async function() {
-                const emptySharedKeyBytes = new Uint8Array(BOX_CONSTANTS.SHARED_KEY_LENGTH);
+                const emptySharedKeyBytes = new Uint8Array(Crypto.Box.constants.SHARED_KEY_LENGTH);
 
                 const keyPairA = await Crypto.Box.keyPair();
                 const keyPairB = await Crypto.Box.keyPair();
 
                 const sharedKeyA = await Crypto.Box.sharedKey(keyPairB.b_public_key, keyPairA.b_secret_key);
-                assert.equal(sharedKeyA.b_shared_secret.length, BOX_CONSTANTS.SHARED_KEY_LENGTH);
+                assert.equal(sharedKeyA.b_shared_secret.length, Crypto.Box.constants.SHARED_KEY_LENGTH);
                 assert.notDeepEqual(sharedKeyA.b_shared_secret, emptySharedKeyBytes);
 
                 const sharedKeyB = await Crypto.Box.sharedKey(keyPairA.b_public_key, keyPairB.b_secret_key);
@@ -132,13 +127,13 @@ export default () => {
                 const sharedKeyB = await Crypto.Box.sharedKey(keyPairA.b_public_key, keyPairB.b_secret_key);
 
                 const msg = Buffer.from("box this message up");
-                const emptyBytes = new Uint8Array(msg.length + SECRET_BOX_CONSTANTS.BOX_ZERO_BYTES);
-                const nonce = Crypto.Random.bytes(SECRET_BOX_CONSTANTS.NONCE_LENGTH);
+                const emptyBytes = new Uint8Array(msg.length + Crypto.SecretBox.constants.BOX_ZERO_BYTES);
+                const nonce = Crypto.Random.bytes(Crypto.SecretBox.constants.NONCE_LENGTH);
 
                 const boxA = await Crypto.Box.box(msg, nonce, sharedKeyA);
                 const boxB = await Crypto.Box.box(msg, nonce, sharedKeyB);
 
-                assert.equal(boxA.length, msg.length + SECRET_BOX_CONSTANTS.BOX_ZERO_BYTES);
+                assert.equal(boxA.length, msg.length + Crypto.SecretBox.constants.BOX_ZERO_BYTES);
                 assert.notDeepEqual(boxA, emptyBytes);
                 assert.notDeepEqual(boxA, msg);
                 assert.deepEqual(boxA, boxB);
@@ -151,7 +146,7 @@ export default () => {
                 const sharedKeyB = await Crypto.Box.sharedKey(keyPairA.b_public_key, keyPairB.b_secret_key);
 
                 const msg = Buffer.from("box this message up");
-                const nonce = Crypto.Random.bytes(SECRET_BOX_CONSTANTS.NONCE_LENGTH);
+                const nonce = Crypto.Random.bytes(Crypto.SecretBox.constants.NONCE_LENGTH);
 
                 const box = await Crypto.Box.box(msg, nonce, sharedKeyA);
 
@@ -163,25 +158,25 @@ export default () => {
 
         describe("sign", function() {
             it("should generate a signing keypair", async function() {
-                const emptyPubBytes = new Uint8Array(SIGN_CONSTANTS.PUBLIC_KEY_LENGTH);
-                const emptySecBytes = new Uint8Array(SIGN_CONSTANTS.SECRET_KEY_LENGTH);
+                const emptyPubBytes = new Uint8Array(Crypto.Sign.constants.PUBLIC_KEY_LENGTH);
+                const emptySecBytes = new Uint8Array(Crypto.Sign.constants.SECRET_KEY_LENGTH);
 
                 const keyPair = await Crypto.Sign.keyPair();
 
-                assert.equal(keyPair.s_public_key.s_public_data.length, SIGN_CONSTANTS.PUBLIC_KEY_LENGTH);
-                assert.equal(keyPair.s_secret_key.s_secret_data.length, SIGN_CONSTANTS.SECRET_KEY_LENGTH);
+                assert.equal(keyPair.s_public_key.s_public_data.length, Crypto.Sign.constants.PUBLIC_KEY_LENGTH);
+                assert.equal(keyPair.s_secret_key.s_secret_data.length, Crypto.Sign.constants.SECRET_KEY_LENGTH);
                 assert.notDeepEqual(keyPair.s_public_key.s_public_data, emptyPubBytes);
                 assert.notDeepEqual(keyPair.s_secret_key.s_secret_data, emptySecBytes);
             });
 
             it("should generate a signature", async function() {
-                const emptySigBytes = new Uint8Array(SIGN_CONSTANTS.SIGNATURE_LENGTH);
+                const emptySigBytes = new Uint8Array(Crypto.Sign.constants.SIGNATURE_LENGTH);
                 const keyPair = await Crypto.Sign.keyPair();
 
                 const msg = Buffer.from("box this message up");
                 const sign = await Crypto.Sign.sign(msg, keyPair);
 
-                assert.equal(sign.s_sig.length, SIGN_CONSTANTS.SIGNATURE_LENGTH);
+                assert.equal(sign.s_sig.length, Crypto.Sign.constants.SIGNATURE_LENGTH);
                 assert.notDeepEqual(sign.s_sig, emptySigBytes);
             });
 
@@ -210,8 +205,8 @@ export default () => {
                 const msg = Buffer.from("box this message up");
                 const ringSig = await Crypto.Ring.sign(msg, secretKeyPair, ring);
 
-                assert.equal(ringSig.r_signature.length, SIGN_CONSTANTS.SIGNATURE_LENGTH * ringSize);
-                assert.equal(ringSig.r_key_image.r_key_image.length, RING_CONSTANTS.KEY_IMAGE_LENGTH);
+                assert.equal(ringSig.r_signature.length, Crypto.Sign.constants.SIGNATURE_LENGTH * ringSize);
+                assert.equal(ringSig.r_key_image.r_key_image.length, Crypto.Ring.constants.KEY_IMAGE_LENGTH);
             });
 
             it("should verify a ring signature", async function() {

@@ -3,6 +3,7 @@ import { CryptoWASM } from "../wasm/crypto-wasm";
 import { ISecretBoxFactory, ISecretBoxKey, SECRET_BOX_CONSTANTS } from "../interfaces/i-secret-box";
 
 export class SecretBoxFactory implements ISecretBoxFactory {
+    public constants = SECRET_BOX_CONSTANTS;
 
     public async key(): Promise<ISecretBoxKey> {
         return {

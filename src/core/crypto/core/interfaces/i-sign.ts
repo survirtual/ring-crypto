@@ -29,6 +29,7 @@ export interface ISignFactory {
     keyPair: () => Promise<ISignKeyPair>;
     sign: (msg: Uint8Array, keyPair: ISignKeyPair) => Promise<ISignature>;
     verify: (msg: Uint8Array, publicKey: ISignPublicKey, signature: ISignature) => Promise<boolean>;
+    constants: typeof SIGN_CONSTANTS;
 }
 
 const SIGN_CONSTANTS = {

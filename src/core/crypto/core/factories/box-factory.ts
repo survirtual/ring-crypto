@@ -1,7 +1,8 @@
 import { CryptoWASM } from "../wasm/crypto-wasm";
-import { IBoxFactory, IBoxKeyPair, IBoxPublicKey, IBoxSecretKey, IBoxSharedSecret } from "../interfaces/i-box";
+import { IBoxFactory, IBoxKeyPair, IBoxPublicKey, IBoxSecretKey, IBoxSharedSecret, BOX_CONSTANTS } from "../interfaces/i-box";
 
 export class BoxFactory implements IBoxFactory {
+    public constants = BOX_CONSTANTS;
 
     public async keyPair(): Promise<IBoxKeyPair> {
         const keys = CryptoWASM.boxKeyPair();
