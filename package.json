@@ -1,6 +1,6 @@
 {
   "name": "ring-crypto",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "browser": "dist/bundle.browser.es5.js",
   "types": "dist/browser/src",
@@ -34,7 +34,10 @@
     "terser": "^3.17.0",
     "tslint": "^5.20.1",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "@babel/polyfill": "^7.7.0",
+    "@types/node": "^10.17.6",
+    "supports-color": "^7.1.0"
   },
   "_moduleAliases": {
     "@root": "./",
@@ -45,8 +48,6 @@
     "@build": "./dist/build"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.7.0",
-    "@types/node": "^10.17.6",
-    "supports-color": "^7.1.0"
+
   }
 }
