@@ -2,7 +2,6 @@
 /transpile
 /test-data
 /cluster-data
-actor.odg
 .directory
 .rpt2_cache
 /dist

@@ -5,13 +5,13 @@ const pkgJson = readFileSync(`${process.cwd()}/package.json`).toString();
 const pkg = JSON.parse(pkgJson);
 const pkgName = pkg.name;
 
-const moduleName = "@actor/runtime";
+const moduleName = "ring-crypto";
 const root = `${process.cwd()}/`;
 
 const isDep = existsSync(`${root}/../../../node_modules`);
 let runtimeFolder;
 if (isDep) {
-    runtimeFolder = pathResolve(`${root}/node_modules/@actor/runtime`);
+    runtimeFolder = pathResolve(`${root}/node_modules/ring-crypto`);
 } else {
     runtimeFolder = pathResolve(`${root}`);
 }

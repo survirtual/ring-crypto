@@ -60,7 +60,7 @@ rollupConfig.inputs.push({
     },
     outputOptions: {
         file: "dist/bundle.node.js",
-        name: "actorRuntime",
+        name: "ringCrypto",
         format: "esm"
     }
 });

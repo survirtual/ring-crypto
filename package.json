@@ -1,5 +1,5 @@
 {
-  "name": "@actor/crypto",
+  "name": "ring-crypto",
   "version": "1.0.0",
   "description": "",
   "browser": "dist/bundle.browser.es5.js",

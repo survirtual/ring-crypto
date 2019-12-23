@@ -2,7 +2,6 @@
 /wasm
 /test
 
-/actor.odg
 .directory
 .rpt2_cache
 .vscode

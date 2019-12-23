@@ -1,5 +1,5 @@
 
-# WebAssembly Crypto Library w/ Ring Signatures
+# Ring Signature Crypto Library using WebAssembly
 
 Compilation of the Monero Crypto library to WebAssembly, with an easy to use Javascript interface.  Tested through the JS interface against Monero test cases.
 
@@ -14,17 +14,17 @@ The WASM is bundled as a base64 buffer inline with the JS.  This increases the b
 
 ### Install the package
 ```
-npm install @actor/crypto
+npm install ring-crypto
 ```
 
 ### Import into your project
 #### Javascript
 ```javascript
-const crypto = require("@actor/crypto").Crypto;
+const crypto = require("ring-crypto").Crypto;
 ```
 #### Typescript
 ```typescript
-import { Crypto } from "@actor/crypto";
+import { Crypto } from "ring-crypto";
 ```
 
 **All samples to follow are in Typescript**

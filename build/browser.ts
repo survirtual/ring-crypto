@@ -29,7 +29,7 @@ rollupConfig.inputs.push({
   },
   outputOptions: {
       file: "dist/bundle.browser.js",
-      name: "actorRuntime",
+      name: "ringCrypto",
       format: "esm"
   }
 });
@@ -82,13 +82,6 @@ let buildType = "all";
 for (let i = 1; i < process.argv.length; i++) {
   const arg = process.argv[i];
   switch (arg) {
-      case "-a":
-      case "--actors": {
-          console.log("Only building actors");
-          process.env.TEST_BUILD = "1";
-          buildType = "actors";
-          break;
-      }
   }
 }
 
