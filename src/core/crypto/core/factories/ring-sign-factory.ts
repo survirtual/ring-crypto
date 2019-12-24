@@ -12,6 +12,7 @@ export class RingSignFactory implements IRingSignFactory {
         ring: ISignPublicKey[],
         keyImage?: IKeyImage
     ): Promise<IRingSignature> {
+        await CryptoWASM.ready();
         const hash = await CryptoWASM.hash(msg);
         if (keyImage == null) {
             keyImage = {
@@ -46,6 +47,7 @@ export class RingSignFactory implements IRingSignFactory {
     }
 
     public async verify(msg: Uint8Array, ring: ISignPublicKey[], ringSignature: IRingSignature): Promise<boolean> {
+        await CryptoWASM.ready();
         const hash = await CryptoWASM.hash(msg);
 
         const publicKeyArray = new PublicKeyArray(BufferUtility.concat(ring.map((pub) => pub.s_public_data)));

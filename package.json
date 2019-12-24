@@ -1,6 +1,6 @@
 {
   "name": "ring-crypto",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "browser": "dist/bundle.browser.min.js",
   "types": "dist/browser/src",

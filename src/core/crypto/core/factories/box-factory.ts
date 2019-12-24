@@ -5,6 +5,7 @@ export class BoxFactory implements IBoxFactory {
     public constants = BOX_CONSTANTS;
 
     public async keyPair(): Promise<IBoxKeyPair> {
+        await CryptoWASM.ready();
         const keys = CryptoWASM.boxKeyPair();
         return {
             b_secret_key: {
@@ -18,6 +19,7 @@ export class BoxFactory implements IBoxFactory {
     }
 
     public async sharedKey(remotePublicKey: IBoxPublicKey, localSecretKey: IBoxSecretKey): Promise<IBoxSharedSecret> {
+        await CryptoWASM.ready();
         const sharedSecret = CryptoWASM.boxCreateSharedSecret(remotePublicKey.b_public_data, localSecretKey.b_secret_data);
         return {
             b_shared_secret: sharedSecret
@@ -25,10 +27,12 @@ export class BoxFactory implements IBoxFactory {
     }
 
     public async box(msg: Uint8Array, nonce: Uint8Array, key: IBoxSharedSecret): Promise<Uint8Array> {
+        await CryptoWASM.ready();
         return CryptoWASM.secretbox(msg, nonce, key.b_shared_secret);
     }
 
     public async open(box: Uint8Array, nonce: Uint8Array, key: IBoxSharedSecret): Promise<Uint8Array> {
+        await CryptoWASM.ready();
         return CryptoWASM.secretboxOpen(box, nonce, key.b_shared_secret);
     }
 

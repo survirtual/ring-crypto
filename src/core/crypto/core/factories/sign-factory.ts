@@ -5,6 +5,7 @@ export class SignFactory implements ISignFactory {
     public constants = SIGN_CONSTANTS;
 
     public async keyPair(): Promise<ISignKeyPair> {
+        await CryptoWASM.ready();
         const keys = await CryptoWASM.generateKeys();
         return {
             s_secret_key: {
@@ -18,6 +19,7 @@ export class SignFactory implements ISignFactory {
     }
 
     public async sign(msg: Uint8Array, keyPair: ISignKeyPair): Promise<ISignature> {
+        await CryptoWASM.ready();
         const hash = await CryptoWASM.hash(msg);
         const sig = await CryptoWASM.generateSignature(
             hash,
@@ -30,6 +32,7 @@ export class SignFactory implements ISignFactory {
     }
 
     public async verify(msg: Uint8Array, publicKey: ISignPublicKey, signature: ISignature): Promise<boolean> {
+        await CryptoWASM.ready();
         const hash = await CryptoWASM.hash(msg);
         return await CryptoWASM.checkSignature(hash, publicKey.s_public_data, signature.s_sig);
     }
