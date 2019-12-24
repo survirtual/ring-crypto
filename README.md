@@ -1,13 +1,13 @@
 
 # Ring Signature Crypto Library using WebAssembly
 
-Compilation of the Monero Crypto library to WebAssembly, with an easy to use Javascript interface.  Tested through the JS interface against Monero test cases.
+This library makes a tested implementation of Ring Signatures readily available and easy to use.
 
-This library was created to make a tested implementation of Ring Signatures readily available and easy to use.
-
-Ring signatures are a key component in future secure democratic elections.
+Ring signatures can be used to disconnect a signer from a message while still validating that the message came from a valid signer.
 
 The WASM is bundled as a base64 buffer inline with the JS.  This increases the bundle size and causes a large slowdown on initial loading, but is very convenient for use.  It is recommended to load the WASM directly (this is currently not supported by this lib out of the box).
+
+Compilation of the Monero Crypto library to WebAssembly, with an easy to use Javascript interface.  Tested through the JS interface against Monero test cases.
 
 ## Getting started
 
