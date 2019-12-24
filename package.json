@@ -1,8 +1,8 @@
 {
   "name": "ring-crypto",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
-  "browser": "dist/bundle.browser.es5.js",
+  "browser": "dist/bundle.browser.min.js",
   "types": "dist/browser/src",
   "scripts": {
     "wasm": "rimraf ./dist/transpile/wasm && node ./dist/transpile/build/wasm-build.js",
