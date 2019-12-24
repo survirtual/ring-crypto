@@ -25,7 +25,7 @@ export class RingSignFactory implements IRingSignFactory {
 
         const sPubb64 = Buffer.from(secretKeyPair.s_public_key.s_public_data);
         const secIndex = ring.findIndex((pub) => {
-            return sPubb64.equals(pub.s_public_data);
+            return sPubb64.equals(Buffer.from(pub.s_public_data));
         });
         if (secIndex < 0) {
             throw new Error("Ring does not contain provided keyPair's public key");
