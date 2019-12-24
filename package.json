@@ -1,7 +1,7 @@
 {
   "name": "ring-crypto",
-  "version": "1.0.7",
-  "description": "",
+  "version": "1.0.8",
+  "description": "Tested implementation of Ring Signatures readily available and easy to use",
   "browser": "dist/bundle.browser.min.js",
   "types": "dist/browser/src",
   "scripts": {
@@ -15,8 +15,8 @@
     "copy-transpile-browser": "npx rimraf ./dist/browser && node ./dist/transpile/build/processing/replace-browser-output.js",
     "copy-transpile-node": "npx rimraf ./dist/nodejs && node ./dist/transpile/build/processing/replace-nodejs-output.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "survirtual",
+  "license": "lgpl-3.0",
   "devDependencies": {
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
