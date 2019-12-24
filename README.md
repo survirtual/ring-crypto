@@ -259,7 +259,7 @@ ring.push(secretKeyPair.s_public_key);
 const msg = Buffer.from("ring sign me!");
 const ringSig = await Crypto.Ring.sign(msg, secretKeyPair, ring);
 
-const valid = wait Crypto.Ring.verify(msg, ring, ringSig);
+const valid = await Crypto.Ring.verify(msg, ring, ringSig);
 
 ```
 
