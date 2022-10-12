@@ -294,5 +294,5 @@ npm run test
 
 ## License
 
-[GNU LESSER GENERAL PUBLIC LICENSE Version 3, 29 June 2007](https://www.gnu.org/licenses/lgpl-3.0.txt)
+MIT Copyright © 2022 Survirtual
 
